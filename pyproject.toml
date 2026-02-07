@@ -1,0 +1,17 @@
+[project]
+name = "comparative-global-ai-regulation"
+version = "0.1.0"
+description = "Comparative Global AI Regulation: Policy Perspectives from the EU, China, and the US"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "CC-BY-4.0"}
+authors = [
+    {name = "Jon Chun", email = "chunj@kenyon.edu"},
+    {name = "Christian Schroeder de Witt", email = "cs@robots.ox.ac.uk"},
+    {name = "Katherine Elkins", email = "elkinsk@kenyon.edu"},
+]
+keywords = ["AI regulation", "EU AI Act", "China AI policy", "US AI policy", "SB 1047"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

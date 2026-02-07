@@ -1,0 +1,565 @@
+\documentclass[a4paper,11pt]{article}
+
+% ──────────────────────────────────────────────
+% Fonts — Source Sans Pro (sans-serif body)
+% ──────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage{sourcesanspro}
+\renewcommand{\familydefault}{\sfdefault}
+
+% ──────────────────────────────────────────────
+% Page layout — A4, 1-inch margins, 1.5 spacing
+% ──────────────────────────────────────────────
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage[parfill]{parskip}          % no indent, paragraph skip
+
+% ──────────────────────────────────────────────
+% Section headings — numbered, bold, sans-serif
+% ──────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\sffamily}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\sffamily}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\sffamily}{\thesubsubsection}{1em}{}
+
+% ──────────────────────────────────────────────
+% Header / footer
+% ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small\sffamily Internet Policy Review --- Draft}
+\rhead{\small\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ──────────────────────────────────────────────
+% Bibliography — biblatex + biber, APA 7th style
+% natbib=true keeps \citep / \citet working
+% ──────────────────────────────────────────────
+\usepackage[hyphens]{url}   % must come before biblatex
+\usepackage{csquotes}
+\usepackage[
+  style=apa,
+  natbib=true,
+  backend=biber,
+  sorting=nyt,
+  url=true,
+  doi=true,
+]{biblatex}
+\addbibresource{main.bib}
+
+% Remap non-standard entry types to @misc
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[typesource=legal, typetarget=misc]
+    }
+    \map{
+      \step[typesource=legislation, typetarget=misc]
+    }
+    \map{
+      \step[typesource=report, typetarget=misc]
+    }
+  }
+}
+
+% ──────────────────────────────────────────────
+% Figures and tables
+% ──────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{adjustbox}
+
+% ──────────────────────────────────────────────
+% Hyperlinks and URLs
+% ──────────────────────────────────────────────
+% url is already loaded by biblatex; just load hyperref and bookmark
+\usepackage{xcolor}
+\usepackage[breaklinks,colorlinks,linkcolor=blue!70!black,citecolor=blue!70!black,urlcolor=blue!70!black]{hyperref}
+\usepackage{bookmark}
+
+% ──────────────────────────────────────────────
+% Miscellaneous
+% ──────────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage[blocks]{authblk}
+
+\DeclareUnicodeCharacter{2060}{}
+
+% ──────────────────────────────────────────────
+% Metadata
+% ──────────────────────────────────────────────
+\title{\textbf{Comparative Global AI Regulation:\\
+Policy Perspectives from the EU, China, and the US}}
+
+\author[1]{Jon Chun\thanks{chunj@kenyon.edu}}
+\author[2]{Christian Schroeder de Witt\thanks{cs@robots.ox.ac.uk}}
+\author[1]{Katherine Elkins\thanks{elkinsk@kenyon.edu}}
+\affil[1]{Kenyon College}
+\affil[2]{University of Oxford}
+
+\date{}  % IPR provides its own date in production
+
+% ══════════════════════════════════════════════
+\begin{document}
+% ══════════════════════════════════════════════
+
+\maketitle
+\thispagestyle{fancy}
+
+% ──────────────────────────────────────────────
+% IPR front-matter
+% ──────────────────────────────────────────────
+\noindent\textbf{Teaser:} The EU, China, and the US take strikingly different approaches to AI regulation, each reflecting distinct cultural and political values.
+
+\medskip
+\noindent\textbf{Keywords:} AI regulation, EU AI Act, China AI policy, US executive order, California SB~1047
+
+\medskip
+\noindent\textbf{Funding statement:} This research received no external funding.
+
+% ──────────────────────────────────────────────
+\begin{abstract}
+% NOTE TO AUTHORS: Revised to foreground the analytical contribution.
+As AI governance enters a critical implementation phase worldwide, this paper presents a comparative analysis of the three most influential regulatory frameworks: the EU AI Act, China's sector-specific AI regulations, and the US approach comprising Executive Order~\#14110 and California's SB~1047. Drawing on regulatory competition theory and a governance typology that distinguishes centralisation from regulatory modality, we show that the three jurisdictions occupy distinct positions---centralised ex ante regulation (EU), distributed ex post enforcement (US), and a hybrid combining centralised guidance with selective enforcement (China). Rather than a unilateral Brussels Effect, our analysis suggests AI governance is evolving toward a multipolar regulatory landscape with significant implications for global firms, open-source developers, and developing nations. Incorporating developments through late 2025---including the Trump administration's revocation of EO~\#14110, the EU AI Act's first enforcement milestones, and China's Cybersecurity Law amendments---we conclude with policy recommendations for European policymakers as the AI Act enters its implementation phase.
+\end{abstract}
+
+% ──────────────────────────────────────────────
+\section{Introduction}
+% ──────────────────────────────────────────────
+
+A growing body of scholarship has examined how different jurisdictions are approaching AI governance. Early comparative work mapped the ethical principles underpinning national AI strategies in the US, EU, and UK \citep{cath2018artificial,floridi2018ai4people}, while \citet{stix2021actionable} identified three distinct policy pathways---ethics-based, rights-based, and risk-based---that governments have pursued. More recently, \citet{smuha2021race} documented the emergence of ``regulatory competition'' in AI, arguing that jurisdictions are now racing not only to develop AI but to set the rules governing it. Studies have examined individual regimes in depth, including the EU AI Act \citep{veale2021demystifying}, China's layered regulatory approach \citep{roberts2021chinese}, and the broader framing contests that shape AI policy \citep{ulnicane2021framing}. However, few studies offer a systematic three-way comparison that situates the EU, China, and the US within a unified analytical framework---a gap this paper seeks to address.
+
+Proposed in April 2021 and agreed upon by December, the EU Act was the first major coordinated effort to regulate AI; it came into force in August 2024. The Biden administration published its Blueprint for an AI Bill of Rights in October 2022. It spoke to the need to protect citizen's privacy and freedom from algorithmic discrimination. The following month, on November 25th, several Chinese government ministries jointly released regulations on AI-generated deepfakes. The US Whitehouse Executive Order \#14110 ``Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence'' was issued in October 2023. In February 2024, California State Senator Scott Wiener introduced what was arguably the strictest AI regulation with the ``SB-1047 Safe and Secure Innovation for Frontier Artificial Intelligence Models Act''. After ten major revisions across both the California Senate and Assembly, the bill passed on September 3rd but was vetoed by Governor Newsom on September 29th. The regulatory landscape has since shifted further: the Trump administration revoked EO~\#14110 in January 2025, the EU AI Act's prohibited-practices provisions took effect in February 2025, and California enacted a successor transparency law (SB~53) in September 2025.
+
+Underlying these varied global efforts are common concerns over the expected social, economic, and geopolitical impacts of AI. The European Union has taken a proactive stance with regard to social effects of AI, implementing stringent regulations aimed at fostering competitiveness while prioritizing ethical considerations, enhancing privacy protections, and mitigating potential harms. China has focused on aligning AI development with ``core socialist values'' while also addressing issues of transparency and workers' rights. The United States, meanwhile, has grappled with concerns about AI-generated disinformation, election integrity, and the role of content recommendation systems in social media, particularly in light of events such as the 2020 elections and the rise of platforms like TikTok~\citep{smit2022}.
+
+Beyond the societal effects, there is universal acknowledgement of the centrality of AI to related technologies like advanced chips, energy production and storage, 5G/6G telecommunications, satellites, and robotics. These illustrate the importance of AI to national economics, competitiveness, and security. Some argue that the EU's stricter AI regulation may inadvertently stifle innovation, deter investment, and weaken Europe's position in the global AI and technology race~\citep{suominen2020}. The tension between regulatory safety and competitiveness is particularly evident in the dynamics between China and the US, with both nations striving to balance innovation with responsible AI development~\citep{itif2024chinaai}.
+
+Still, there are efforts to transcend national policies and competitions to develop a global harmonization of AI regulation. AI automation threatens widespread job displacement, exacerbates inequality and accelerates the need to transition to a rapidly-evolving job market
+\citep{Whitehouse2024c}. In September 2024, the United Nations' AI Adivsory Body released a report highlighting key areas of concern that transcend national boundaries. These include pervasive latent biases, emergence of surveillance states, and AI generated disinformation~\citep{UNAI2024}. Additionally, serious legal, security, and humanitarian issues---particularly related to autonomous weapons and public security---underscore the importance of international cooperation. As AI continues to evolve, the global community faces the complex task of developing regulatory frameworks that can effectively address these multifaceted challenges while fostering innovation and ensuring equitable benefits across nations.
+
+% ──────────────────────────────────────────────
+\section{Theoretical Framework}
+% ──────────────────────────────────────────────
+
+% NOTE TO AUTHORS: This section establishes the analytical lens for the
+% comparative analysis. Please review and revise in your own voice.
+
+Comparative studies of technology regulation have long observed that jurisdictions adopt divergent governance strategies shaped by institutional traditions, political economy, and geopolitical positioning \citep{cath2018artificial,ulnicane2021framing}. As \citet{smuha2021race} argues, the global ``race to AI regulation'' now rivals the race to develop the technology itself. This paper draws on three complementary theoretical perspectives to move beyond description toward analytical comparison of the EU, Chinese, and US approaches to AI regulation.
+
+First, we draw on \textit{regulatory competition theory}, which holds that jurisdictions compete---and learn from one another---through their regulatory choices \citep{bradford_brussels_2020}. Bradford's concept of the ``Brussels Effect'' describes a specific mechanism by which the EU's large single market incentivizes global firms to adopt EU standards unilaterally, effectively exporting European regulation worldwide. We examine whether the EU AI Act exhibits this dynamic and how competing regulatory models in China and the US may limit or reinforce it.
+
+Second, we employ a \textit{governance typology} that distinguishes regulatory frameworks along two dimensions: (1)~the degree of \textit{centralisation} (top-down versus distributed) and (2)~the primary \textit{regulatory modality} (ex ante risk-based rules versus ex post enforcement through existing legal frameworks). This typology reveals that the three jurisdictions occupy distinct positions: the EU favours centralised, ex ante regulation; the US favours distributed, ex post enforcement; and China occupies a hybrid position combining centralised guidance with decentralised, sector-specific implementation and selective enforcement.
+
+Third, we attend to the \textit{innovation--safety tradeoff} that pervades AI governance debates globally \citep[cf.][]{stix2021actionable}. Each jurisdiction resolves this tension differently, reflecting deeper differences in political values: the EU privileges precaution and fundamental rights \citep{veale2021demystifying}, China prioritises social stability alongside state-directed industrial competitiveness \citep{roberts2021chinese}, and the US emphasises market-driven innovation with voluntary commitments. By situating the empirical comparison within these frameworks, we aim to identify not only \textit{how} the three approaches differ, but \textit{why} they differ and what the implications are for the trajectory of global AI governance.
+
+% ──────────────────────────────────────────────
+\section{Methodology}
+% ──────────────────────────────────────────────
+
+% NOTE TO AUTHORS: Adapt this to accurately reflect your actual research process.
+
+This study employs a \textit{comparative case study design} \citep[cf.][]{bradford_brussels_2020} to analyse AI regulatory frameworks across three jurisdictions: the European Union, the People's Republic of China, and the United States (at both federal and state levels). These three cases were selected because they represent the world's largest AI economies, each with mature regulatory activity, and because they instantiate distinct governance models---centralised ex ante regulation (EU), hybrid state-guided governance (China), and distributed market-oriented regulation (US)---enabling analytically productive comparison.
+
+The primary method is \textit{legal and policy document analysis}. For each jurisdiction, we systematically reviewed the principal legislative texts, executive orders, regulatory guidance, and official communications as of late 2024. For the EU, this centres on the AI Act (Regulation 2024/123) and associated guidance from the European Commission and AI Office. For China, we analysed the suite of sector-specific regulations summarised in Table~\ref{tab:china_laws}, drawing on both official Chinese-language sources and English-language expert commentary. For the US, we examined Executive Order \#14110, the proposed California SB~1047, and related federal and state legislative activity.
+
+We supplement primary legal analysis with secondary sources including peer-reviewed scholarship, policy institute reports, and expert commentary to contextualise each regime's practical enforcement and geopolitical significance. The comparison is structured around the governance typology introduced in the preceding section, enabling systematic analysis of how each jurisdiction balances centralisation, regulatory modality, and the innovation--safety tradeoff.
+
+% ──────────────────────────────────────────────
+\section{AI Governance}
+% ──────────────────────────────────────────────
+
+This section describes the emerging AI regulatory frameworks in the EU, China, and the US at both federal and state levels.  In particular, it contrasts the top-down, risk-based approach of the EU AI Act with the more market-driven approach of the US. The latter emphasizes coordinating existing legal, regulatory, and enforcement entities from the federal level down to states and cities. In between is the Chinese approach, which has the appearance of centralized regulatory control, but in practice emphasizes decentralized innovation, regional competition, and economic development at the local levels.
+
+While the EU and China appear to have relatively stable AI regulatory frameworks, there is a growing debate in the US about the future direction of AI regulation. The Biden Executive Order \#14110 on ``Safe, Secure, and Transparent Development and Use of AI'' coordinates over 100 specific tasks both within and between over 50 federal entities in a decentralized way that largely augments existing regulatory laws and agencies. However a number of US Congressional committees, proposals, and influential public/corporate interest groups are lobbying for a new AI regulatory structure that is more centralized, restrictive, and punitive than EO \#14110. Some even promote centralized registration of models, proofs of AI safety, and criminal penalties~\citep{LegiScan2024, schumer2023}.
+
+% ──────────────────────────────────────────────
+\section{The European Union}
+% ──────────────────────────────────────────────
+
+\subsection{Overview}
+
+The 2024 EU AI Act is positioned as the world's first comprehensive AI law~\citep{eu_ai_act_2024}. Just as prior European general purpose legislation, such as the 2016 General Data Protection Regulation (GDPR)~\citep{gdpr_article7}, the EU AI Act represents complex joint efforts and interests across various EU bodies, including the European Commission, the European Parliament and the European Council, where the latter represents the Heads of State of all EU member countries. Influence on the Act's formation was also taken publicly by national government officials, such as France's premier Macron's overt lobbying for exemptions for open source AI providers such as Mistral~\citep{abboud_eus_2023}, as well as, both publicly and covertly, by lobbying and industry groups, including Big Tech~\citep{perrigo_exclusive_2023}, and German pro open-source non-profit LAION~\citep{noauthor_call_nodate}.
+
+Uniquely, the Act was first constructed within a product safety framework, but then blended with a fundamental rights agenda at the behest of the European Parliament and against pressure by the European Commission~\citep{caroli_podcast}. This approach resulted in a unique and novel blend of legislative frameworks, clearly setting the EU AI Act apart from prior legislation building on established frameworks such as the GDPR. As Dragos Tudorache, a member of the European Parliament from Romania and the chair of the Special Committee on Artificial Intelligence in a Digital Age, remarked: ``Regulation isn't just rules, it's an opportunity to express our values~\citep{tyrangiel_opinion_2024}.''
+
+While constituting an innovative syncretism at heart, the Act does follow and respect earlier European generalist regulatory initiatives, such as the GDPR, and the 2012 Digital Markets Act~\citep[DMA]{dma}. In fact, the EU started examining the compatibility of the GDPR and AI as early as in 2020~\citep{eprs2020gdpr}. Nevertheless, the release of ChatGPT in November 2022 and its rapid adoption by millions of consumers worldwide caught European policymakers off-guard and led to significant adjustments to the Act's handling of AI governance.  On December 9th, 2023, the Act was provisionally agreed between the European Parliament and the European Council. During the 3-day round of negotiations, the Act's scope was tightened~\citep{compromise}. It was clarified that the Act does not apply outside of European law, does not infringe on the security competences of the member states or so-entrusted entities, nor any military or defense applications. Importantly, it was clarified that the Act would not apply to sole purposes of research and innovation, nor other non-professional use. Most importantly, the Act's traditional approach to AI systems risk classification was complemented by the notion of general-purpose AI systems (GPAI)~\citep[Article 3(63)]{eu_ai_act_2024}, resulting in a parallel governance track for such AI systems. Despite open questions, the Act's ambition to distinguish between GPAI and non-GPAI systems, and GPAI systems of \textit{systemic risk}, is similarly unique among AI regulations globally.
+
+\subsection{The Geopolitics of the Act}
+
+Besides regulating the EU single market, the Act is widely regarded as a strategic effort by the European Commission to establish themselves as the leading AI rulemakers globally~\citep{noauthor_eus_2024}. Just as after the adoption of the GDPR in 2016~\citep{gdpr_article7}, it is speculated that companies across the world will begin to prioritize compliance with European AI law out of economic necessity, not through coercion~\citep{almada_brussels_2024}. In the case of the GDPR, this form of ``Brussels Effect''~\citep{bradford_brussels_2020} was complemented by a ``de jure'' effect in which countries with a lack of their own regulatory capacity, such as many developing countries,  incorporated EU laws instead. For example, the Philippines incorporated the right to be forgotten into their Data Privacy Act of 2012~\citep{philippines2012dataprivacy,linklaters}. In a similar way, it is speculated that the EU AI Act may similarly become the de-facto standard for AI governance in much of the Western and developing world~\citep{almada_brussels_2024}.
+
+One direct institutional consequence of the EU AI Act is the establishment of a novel authority under the helm of the European Commission, namely the EU AI Office. This new office will not only oversee AI regulation and AI systems' compliance, provide a central pool of AI expertise to the EU's member states, but also provides a ``strategic, coherent, and effective European approach on AI at the international level''~\citep{eu_ai_office}. A specialist position, The Advisor for International Affairs, will represent the AI Office in ``global conversations on convergence toward common approaches''~\citep{eu_ai_roles}. The EU AI Office therefore is not only meant to consolidate the EU's approach to AI regulation within the European market, but will likely centrally support the EU's foreign policy ambitions in economic and trade negotiations.
+
+\subsection{Laws and Regulation}
+
+The Act is designed as an \textit{adaptive legislation}, meaning that many details are intentionally left vague to permit later adaptation as technology changes. At its core lies a risk classification system that puts obligations mostly on the developers (``providers'') of AI systems. Importantly, the Act not only applies to systems that are placed on the market or put into service in the EU, but also to AI systems whose output is used in the EU. The use of AI systems for national security, research, or recreational purposes, as well as, more generally, end-users of AI systems are excluded from regulation under the Act.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/eu_ai_act_decisiongram.pdf}
+    \caption{Decision tree for providers of (GP)AI systems and GPAI models on the way to the EU market.}
+    \label{fig:figure1}
+\end{figure}
+
+\subsubsection{Systems and Models}
+
+The AI Act adopts the definition of \textit{AI system} from the OECD's AI Principles, defining an AI system as \textit{``a machine-based system that is designed to operate with varying levels of autonomy and that can, for explicit or implicit objectives, generate outputs such as predictions, recommendations, or decisions that influence physical or virtual environments''}~\citep{oecd_ai_principles}. \textit{AI models}, conversely, are mathematical algorithms or trained models that, in isolation, lack additional components such as a user interface or hardware integration that would allow them to be used as an AI system.
+
+\sloppy
+Among models, the Act further disambiguates between non-GPAI and \textit{general-purpose AI (GPAI) models}, with the latter defined as \textit{``an AI model, including where such an AI model is trained with a large amount of data using self-supervision at scale, that displays significant generality and is capable of competently performing a wide range of distinct tasks regardless of the way the model is placed on the market and that can be integrated into a variety of downstream systems or applications, except AI models that are used for research, development or prototyping activities before they are placed on the market''}~\citep[Article 3(63)]{eu_ai_act_2024}. Where a GPAI model is integrated into an AI system, the system is referred to as a \textit{GPAI system} provided that the system has the capability to serve a variety of purposes.
+
+\subsubsection{Roles}
+
+The Act fundamentally distinguishes between the roles of \textit{provider}, \textit{deployer}, \textit{importer} and \textit{distributor}. Providers are those \textit{``placing on the market or putting into service AI systems or placing on the market general-purpose AI models in the Union''}~\citep[Article 2]{eu_ai_act_2024}, irrespectively of their location. They have pre-market obligations including an initial risk assessment, risk-specific compliance, as well as risk-specific post-market obligations. Deployers are users of AI systems that are based on the EU and that don't fall within a small number of non-professional use cases. The Act furthermore distinguishes between AI models or systems provided or deployed from within the EU, and those from outside.
+
+\subsection{Risks}
+
+At the core of the EU AI Act lies a risk classification system for AI systems based on their possible ``direct'' use cases. In the case of GPAI systems, the degree of ``directness'' is understood as the extent to which implemented safety measures can prevent risk-relevant use by deployers. If local market surveillance believe that a GPAI systems can be (or become) ``directly'' used for high-risk activities the EU AI Office will carry out the corresponding compliance procedures~\citep{eu_ai_act_2024}.
+
+\paragraph{Prohibited use cases.} Integrating fundamental human rights into the product safety framework, the Act defines a class of \textit{prohibited AI practices}, such as placing on the market AI systems that can be used for certain forms of manipulation and exploitation, social scoring purposes, and certain biometric identification purposes. Furthermore, the deployment of AI systems that leave the user uninformed about their interaction with an AI system, emotion recognition systems or biometric categorisation systems, or AI systems producing deepfakes are all likewise prohibited~\citep[Article 5]{eu_ai_act_2024}.
+
+\paragraph{High-risk use.} The class of \textit{high risk} systems constitutes the majority of risk-related regulation~\citep[Article 6]{eu_ai_act_2024}. High-risk systems include a wide variety of systems as defined in~\citep[Annex I-III]{eu_ai_act_2024}, including systems meant to serve as safety systems for other AI systems. According to~\citep[Article 28(2a)]{eu_ai_act_2024}, providers of high risk systems are subject to compliance obligations, including the establishment of risk and quality management systems, data governance, human oversight, cybersecurity measures, postmarket monitoring, and maintenance of the required technical documentation. Owing to the Act's adaptive nature, it is expected that these obligations will be further detailed in later, sector-specific regulation.
+
+\sloppy
+\paragraph{Limited risk.} Chatbots or AI systems that generate content or aid in decision-making without any critical safety aspects or significance are deemed of \textit{limited risk}, although the Act only indirectly defines this class~\citep[Recital 32a]{eu_ai_act_2024}. These systems are merely subject to transparency obligations, including end-users of such systems must be informed that they are interacting with AI.
+
+\paragraph{Minimal risk.}
+AI systems that pose little to no risk to users' rights, health, or safety are left unregulated by the Act, although other obligations under EU law still apply. These systems are sometimes referred to as \textit{minimal risk} although this term is not used in the Act.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/risk_pyramid.pdf}
+    \caption{The risk pyramid for AI systems \citep[taken from][]{madiega2024artificial}.}
+    \label{fig:figure2}
+\end{figure}
+
+Importantly, in the case of GPAI models, a special risk category is defined for the standalone model even before having been integrated into an AI system.
+
+\paragraph{GPAI models of systemic risk.}
+The Act imposes particular regulation on providers of general-purpose AI models of systemic risk~\citep[Article D]{eu_ai_act_2024}, which it defines to be all models for which \textit{``the cumulative amount of compute used for its training measured in floating point operations (FLOPs) is greater than $10^{25}$''}~\citep{eu_ai_act_2024}. The limit of $10^{25}$ was reportedly reached as a middle ground between $10^{24}$ and $10^{26}$ demanded by two opposing factions, the European Parliament, and the European Commission~\citep[Chapter II(8)]{eu_ai_act_2024}\citep{caroli_podcast}. Providers of GPAI need to register their model with the European Commission, and need to adhere to a wide-ranging catalogue of safety and security criteria. Owing to its adaptive nature, the Act purposefully leaves various technical criteria related to systemic risk classifications open for later adjustment to account for the unpredictability of technological progress.
+
+\subsection{Innovation and Open Source}
+
+The Act contains several measures intended to harness the economic and societal benefits of open-source AI software~\citep{eiras_near_2024,eiras_risks_2024}. The Act defines free and open-source AI components to cover ``the software and data, including models and general-purpose AI models, tools, services or processes of an AI system'' and explicitly states that provision of such models on open repositories should not seen as a form of monetization~\citep[Recital 103]{eu_ai_act_2024}.
+
+\sloppy
+The EU Act contains wide-ranging exemptions for providers of certain AI systems provided under free and open source software licenses~\citep[Article 53-54]{eu_ai_act_2024}. To be exempt, the systems may not contain GPAI models that fall within the systemic risk category, or otherwise exhibit unacceptable behavior. The Act distinguishes the above from providers of pre-trained AI models that are made accessible to the public under a license that allows for the access, usage, modification, and distribution of the model, and whose parameters, including the weights, the information on the model architecture, and the information on model usage, are made publicly available. It is to be noted that the term open source model is not used explicitly and the degree of legal overlap with open source software is not immediately clear, and hence such models might be referred to rather as open models. Open models are not exempt from Article \citep[C(1)(c)-(d)]{eu_ai_act_2024}, as well as \citep[Article D]{eu_ai_act_2024} and \citep[Article 28(2a)]{eu_ai_act_2024}, the latter governing third-party obligations ``along the AI value chain of providers, distributors, importers, deployers or other third parties'' ~\citep{eprs2020gdpr} for high-risk AI systems.
+
+Under any circumstances, providers of open GPAI model providers are responsible for transparency obligations according to~\citep[Article C(1)(c)-(d)]{eu_ai_act_2024}. These transparency requirements include respecting existing Union copyright law~\citep[Article C(1)(c)]{eu_ai_act_2024} according to Article 4(3) of the Digital Single Market Directive (EU) 2019/790~\citep{dsm_directive_2019}, and the need to make a \textit{``sufficiently detailed summary of the content used for training of the general-purpose AI model''}~\citep[Article C(1)(d)]{eu_ai_act_2024}. The consequences of these transparency requirements for open GPAI model providers have been examined in~\citep{warso2024AIAct}. Importantly, Directive (EU) 2019/790 expands GDPR regulation to copyright owners who share content online, meaning that key GDPR rights, such as the right to opt out~\citep[GDPR Article 7]{gdpr_article7} would require that copyright owners could ask for their data to be removed from open GPAI model training data.
+
+As a further measure to stimulate innovation, member states can establish a regulatory sandbox, i.e. a controlled environment that facilitates the development, testing and validation of innovative AI systems (for a
+limited period of time) before they are put on the market~\citep{madiega2024artificial}.
+
+\subsection{Implementation Progress (2025)}
+
+The AI Act's phased enforcement began on February 2, 2025, when the provisions banning prohibited AI practices---including social scoring, manipulative subliminal techniques, and most real-time remote biometric identification---became legally binding. On August 2, 2025, the GPAI model governance obligations took effect, requiring providers to comply with transparency and systemic-risk provisions, with penalties of up to \texteuro35~million or 7\% of global annual turnover. Full high-risk AI system requirements will apply from August 2026. These milestones mark the EU's transition from legislative ambition to operational enforcement.
+
+% ──────────────────────────────────────────────
+\section{China}
+% ──────────────────────────────────────────────
+
+\subsection{Overview}
+
+China's approach to AI governance and regulation is a hybrid between the centralized, top-down approach of the EU and the decentralized, free-market of competing interests in the US. Like the EU, China emphasizes safety, individual protections, and social harmony through top-down guidance, regulation, and enforcement~\citep{zhang2022}. Like the US, China also emphasizes bottom-up innovation and economic development through a mix of decentralized provincial control alongside very competitive local markets. This hybrid approach seeks to optimize the benefits from both the EU and US models. The EU AI Act takes a coherent, universal risk-based approach, but the abstract and ambiguous language belies the hard work of grappling with real-world details in applying these general rules to disparate, complex and highly situational cases. Conversely, a fragmented, sector-specific approach like the US EO \#14110 lacks coherent high-level simplicity, but benefits from experienced domain experts translating goals into more clear, immediate, and effective enforcement. China seeks to benefit from the coherence of the EU AI Act and the practical benefits of the US approach, which promotes innovation and economic competitiveness.
+
+\subsection{Laws and Regulations}
+
+% Prevent the figure from moving out of this section
+\FloatBarrier
+
+China has advanced some of the first AI laws and regulations at the national level, which are summarized in Table~\ref{tab:china_laws}. Unlike the horizontal risk-based approach of the EU, China has favored the sector-specific US approach of laws tailored to specific use-cases. These specific use-cases range from data privacy (November 2021) to recommendation algorithms (March 2022) to generative AI (January \& August 2023). Despite appearances of centralized government control, Chinese AI regulations are the product of an iterative process involving diverse stakeholders that include mid-level bureaucrats, academics, corporations, startups, and think tanks~\citep{sheehan2024}. The central government relies upon a pipeline of these experts to formulate, clarify, and interpret the details, while local officials mainly concern themselves with ensuring goals and outcomes are aligned with Chinese and socialist ideology~\citep{zhang2022}. Both China's State Council and the Chinese Academy of Social Sciences have announced intentions of working towards a more holistic National AI law, although the outcome is uncertain~\citep{webster2023}.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}l >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{2.6cm} X@{}}
+\toprule
+\textbf{Date} & \textbf{Title} & \textbf{Issuing Body} & \textbf{Description} \\
+\midrule
+June 1, 2017 & Cybersecurity Law & National People's Congress & Establishes legal frameworks for cybersecurity, including data protection and network security, which indirectly impact AI development and deployment. \\
+\addlinespace
+Sept.\ 1, 2021 & Data Security Law & National People's Congress & Provides regulations on data processing and security, affecting AI systems that process large amounts of data. \\
+\addlinespace
+Nov.\ 1, 2021 & Personal Information Protection Law (PIPL) & National People's Congress & China's comprehensive data privacy law governing the collection, storage, use, and transfer of personal information, impacting AI systems that handle personal data. \\
+\addlinespace
+March 1, 2022 & Algorithm Recommendation Regulation & Cyberspace Administration of China (CAC) & Regulates algorithms used for content recommendations, requiring transparency and fairness, and prohibiting practices that disrupt public order. \\
+\addlinespace
+Jan.\ 10, 2023 & Deep Synthesis Regulation & CAC & Governs generative AI technologies, focusing on the authenticity and traceability of AI-generated content to prevent misinformation. \\
+\addlinespace
+Aug.\ 15, 2023 & Generative AI Measures & CAC and six other authorities & Targets generative AI services, imposing obligations on service providers to ensure legality, fairness, and cybersecurity of AI-generated content. \\
+\addlinespace
+Oct.--Nov.\ 2022 & AI Industry Promotion Regulations (Shanghai \& Shenzhen) & Shanghai and Shenzhen Municipal Governments & Local regulations to promote AI development, including ethical oversight and support for innovation within the AI industry. \\
+\addlinespace
+Expected 2024/2025 & Draft Artificial Intelligence Law & State Council (drafting stage) & A comprehensive national AI law is being drafted, aiming to provide an overarching legal framework for AI governance in China. \\
+\bottomrule
+\end{tabularx}
+\caption{Chinese AI laws and regulations.}
+\label{tab:china_laws}
+\end{table}
+
+% Prevent the figure from moving out of this section
+\FloatBarrier
+
+\subsection{Registration}
+
+% Prevent the figure from moving out of this section
+\FloatBarrier
+
+On paper, China has perhaps the most onerous AI regulation requirements of the three regions considered. Table~\ref{tab:china_compliance} lists the three major steps for deploying advanced AI models (for example, Baidu's LLM ERNIE) in order to be in compliance with regulatory laws. These include model registration, rules for data management, and provisions for ongoing monitoring for compliance. The registration process alone illustrates how strict central regulation can slow down innovation and economic growth. As of March 2024, only 546 AI models have been registered, and just seventy are Large Language Models~\citep{chinamoney2024}. This number is in stark contrast to the countless commercial models, variants, and over 500,000 open-source LLMs on Huggingface.co~\citep{huggingface2024}, which is banned in China~\citep{chinatalk2023}.
+
+\subsection{Compliance and Industrial Policy}
+
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.8cm} X@{}}
+\toprule
+\multicolumn{2}{@{}l}{\textbf{Model Registration}} \\
+\midrule
+Approval Process & AI models, especially generative and LLM, must undergo thorough review for compliance with regulatory standards by the CAC and other bodies. \\
+Public Use/Licensing & After approval, all models must be registered for public use. \\
+Sector-Specific Approvals & Approval by additional sector-specific regulatory bodies may be required (e.g.\ healthcare, finance, security). \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Data Management}} \\
+\midrule
+Source and Legitimacy & All training data must come from legitimate and lawful sources and be accurately labeled and documented to ensure traceability and accountability. \\
+Privacy Protection & All companies must comply with China's privacy laws (e.g.\ PIPL) and implement robust measures to protect personal data and prevent misuse. \\
+Content Verification and Censorship & Providers must ensure training data does not contain prohibited data like politically sensitive or controversial content that could disrupt public order or national security. \\
+Foreign-Language Content & Training data must include foreign language content to enhance global competitiveness. \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Compliance Obligations}} \\
+\midrule
+Security Assessment & Before launch, mandatory comprehensive security assessments to identify potential risks and vulnerabilities. \\
+Algorithm Registration & Registration of all algorithms including details on their design, functionality, and impacts on users and society. \\
+Ethical/Legal Compliance & Audit for compliance with ethical and legal standards, especially in avoiding inaccuracies, discrimination, and the perpetuation of biases against individual or groups. \\
+Ongoing Monitoring and Reporting & Continuous monitoring for system errors or deviations from approved conditions of use to allow for timely corrections. \\
+\bottomrule
+\end{tabularx}
+\caption{AI model compliance steps in China.}
+\label{tab:china_compliance}
+\end{table}
+
+
+In 2015, China announced a national strategic plan and industrial policy called ``Made In China 2025'' or MIC2025 integrated with their 13th (2016--2020) and 14th (2021--2025) Five Year Plan~\citep{mic2015}. MIC2025 directs strong government support for innovation and high-end manufacturing to help make China a global leader in cutting-edge technologies like AI by 2025~\citep{crs2019}. Part of this plan calls for supporting 10,000 ``Little Giants,'' the small and mid-sized enterprises (SME) recognized as a key source of innovation~\citep{globaltimes2021}. Although large ``National Champions'' like Baidu, Tencent, and Alibaba are expected to fully comply with AI regulations because of their dominant influence, the Little Giants are informally afforded leeway in order to avoid heavy regulatory burdens that could stifle innovation~\citep{zhang2024}.
+
+What this means from a practical standpoint is that despite such rigorous guidelines, enforcement in China is relatively lax. Startups and SMEs fly under the radar as long as they do not have a large public presence~\citep{zhang2022}. This approach allows for the promotion of  innovation, economic growth, and international competitiveness~\citep{yang2024}.
+
+China's hybrid system of AI regulation and selective enforcement attempts to combine the strengths of both the EU and the US approaches. While regulatory guidance is generally light, top-level enforcement usually comes into play when destabilizing patterns arise. This reactive enforcement can cause transitory market disruptions and lead to strict and sometimes surprisingly punitive measures to reign in excesses and outcomes at odds with CCP values like ``common prosperity''~\citep{caixin2021}. This pattern of regulatory crackdown is visible in other sectors from real estate\citep{bloomberg2021} to education~\citep{intresse2024}. Harsh penalties were levied by regulators between 2020--2022 to try to control excessive inequality and check the rise of powerful tech (Alibaba) and financial (Ant Group) corporations that could challenge government authority~\citep{chen2023}. Although deflating the real estate bubble significantly reduced household wealth tied to property speculation, the IMF shows China leads the world's largest economies with a 5.2\% GDP growth~\citep{imf2024}. Some of this success is attributed to China's strategic industrial policy with its flexible regulatory framework.
+
+\subsection{Recent Developments (2025)}
+
+China's regulatory apparatus continued to evolve in 2025. In August, the State Council issued the ``AI Plus'' Action Plan~\citep{china_aiplus_2025}, targeting 70\% AI penetration across key economic sectors by 2027 and 90\% adoption of next-generation AI agents by 2030. In October, the National People's Congress amended the Cybersecurity Law~\citep{china_cybersecurity_2025} to incorporate AI governance provisions for the first time in national legislation---including mandated AI ethics review, risk assessment, and increased administrative penalties (from RMB~1 to 10~million). Mandatory AI content-labelling rules also took effect in September 2025. These developments confirm China's hybrid pattern: centralised strategic direction accompanied by pragmatic, sector-specific implementation.
+
+% ──────────────────────────────────────────────
+\section{United States}
+% ──────────────────────────────────────────────
+
+\subsection{Overview}
+
+On October 30, 2023 US President Biden signed an executive order (EO \#14110) on the ``Safe,Secure,and Trustworthy Development and Use of Artificial Intelligence''~\citep{whitehouse2023b}. This act moved beyond the voluntary commitments secured in July 2023~\citep{whitehouse2023a} and the October 2022 AI Bill of Rights~\citep{whitehouse2022}.  EO \#14110 represents the most comprehensive form of AI regulation in the United States to that date. It directly delegates AI responsibilities to over 50 existing federal regulatory agencies and other bodies with over 100 specific tasks designed to:
+
+\begin{itemize}
+  \item Build out the capacity to address emerging concerns around AI
+  \item Integrate AI into agency operations
+  \item Enhance coordination between agencies on AI-related matters
+\end{itemize}
+
+On August 28, 2024 the California Assembly passed SB 1047, the Safe and Secure Innovation for Frontier AI Models Act. Unlike the federal Presidental Executive Order, this state law focused on creating a regulatory framework to test, register, and audit models that could present a danger to public safety. This AI regulation targets models with substantial investment in pretraining and fine-tuning above given thresholds of \$100M/10\textsuperscript{26} flops and \$10M/10\textsuperscript{25} flops respectively.
+
+\subsection{Laws and Regulations}
+
+The US regulatory tradition emphasises decentralised oversight: Congress passes framework legislation, and specialised federal agencies---such as the FTC, CPSC, and CFPB for consumer protection---enforce rules within their domains~\citep{nsf2024, sec2024, epa2024}. This structure reflects a philosophical distrust of centralised power, reinforced by a \$46~billion lobbying industry that mediates between competing interests~\citep{massoglia2024}. Technology regulation has historically combined legislative action, executive orders, agency rulemaking, and industry self-regulation.
+
+To remain competitive in rapidly changing world markets, US tech companies often pursue self-regulation as a strategy for tackling privacy, digital advertising, content moderation, and cybersecurity~\citep{cusumano2021, minow2023}. We see a similar approach taken in the Biden-Harris approach to securing voluntary commitments by leading AI companies to manage the risks posed by AI~\citep{whitehouse2023b}. Furthermore, international agreements or regulations are sometimes adopted by US companies to do business abroad, as in the case for EU's GDPR~\citep{gdpr_article7} and China's Cybersecurity Law~\citep{npc2016}. The regulatory process often combines these approaches, with laws providing the foundation for agency regulations involving public input and expert consultation as technologies and circumstances evolve.
+
+The rapid pace of AI innovation and the immense potential impact of AI, coupled with the lack of technical expertise in government, has reversed the normal sequence for enacting regulation that begins with the U.S. Congress. EO \#14110 is a case where the executive branch is initiating many AI-related policies---from research to regulation---partly due to its ability to more quickly respond in a coherent and comprehensive manner \citep{whitehouse2023b}. Although somewhat exceptional for the US process of lawmaking, White House Presidential executive orders more closely match the top-down, centralized organization of the European Commission in Brussels and the CCP in Beijing.
+
+In spite of this similarity to the E.U. and China, aspects of the order nonetheless reflect the distinct US approach that can be characterized as ``bottom-up'' and distributed rather than ``top-down'' and centralized. In contrast to the more centralized, top-down approach to AI regulation prioritizing safety (EU) and social stability (China), the United States takes a more distributed, multi-stakeholder approach to AI regulation that mirrors its earlier approaches to regulating new technologies.
+
+While universal directives on AI are provided by the centralized political bodies of the CCP and to a lesser extent, the European Commission, a wide range of guidelines, initiatives, laws, and other policies including trade related to AI are distributed between various US federal branches and agencies and even states~\citep{perkins2024}. EO \#14110 organizes this distributed regulatory system with specific objectives and deadlines delegated to various federal agencies directly from the executive branch.
+
+Meanwhile, the US legislative branch is considering dozens of individual bills~\citep{govtrack2024}. Thune's 2023 AI Research, Innovation and Accountability Act would create enforceable accountability and transparency for high-risk systems. The REAL Political Advertisements Act~\citep{klobuchar2023} aims to limit the use of Generative AI in campaigns, The Stop Spying Bosses Act~\citep{casey2023} aims to limit the use of AI by employers to surveil employees, and the No FAKES Act~\citep{coons2023} aims to protect visual and voice likenesses of individuals. Two notable, ambitious, and more restrictive plans have been introduced by Senator Schumer in the form of his SAFE initiative~\citep{schumer2023} and the Blumenthal-Hawley Framework~\citep{blumenthal2024}. At this time, however, none have been passed. Meanwhile, individual US states and municipalities have passed laws and are debating more extensive regulation regarding AI~\citep{iapp2024}. In 2023 more than 40 bills were proposed, and Texas and Connecticut adopted statutes focused on preventing discrimination~\citep{whitecase2024}. In the 2024 legislative session, at least forty states, Puerto Rico, The Virgin Islands and Washington D.C. have introduced AI bills and six states, Puerto Rico, the Virgin Islands have adopted resolutions or passed legislation~\citep{ncsl2023}. While Article VI of the US Constitution affirms the supremacy of federal law over state law, California is home to many of the largest AI corporations, and other industries (e.g. auto emission levels) have often complied with Calfornia's stricter standards.
+
+\subsection{White House Executive Order 14110}
+
+% Prevent the figure from moving out of this section
+\FloatBarrier
+
+Since 2016 and over three different Presidential administrations, a number of executive orders related to AI have been issued. The Biden White House's October 2023 ``Executive Order on the Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence'' is the most comprehensive to date~\citep{whitehouse2023b}. It directs over fifty federal agencies to take over one hundred specific actions addressing eight core policy areas listed in Table~\ref{tab:us_eo14110} including: safety and security, innovation and competition, worker support, bias and civil rights, consumer protection, privacy, federal use of AI, and international leadership~\citep{whitehouse2024a}. The eight policy areas are ranked by the aggregate number of requirements and federal entities assigned to each area. These arguably provide a loose sense of priorities in each policy area from the most relevant (federal use, safety/security, and innovation/competition) to the least (worker support). EO \#14110 implements many guidelines in the 2022 AI Bill of Rights to ensure the responsible design and use of artificial intelligence with regards to civil rights and privacy in areas such as hiring, healthcare, and surveillance~\citep{whitehouse2022}.
+
+EO \#14110 also addresses many of the core concerns highlighted in the EU AI Act. It does so, however, with several key differences~\citep{crs2024}. While the EU AI Act establishes a new regulatory agency, the EU AI Office, which coordinates with member states, industry and civil society, the current US strategy relies upon augmenting the extensive network of existing US federal agencies with pre-existing specialized domain expertise. The US approach can be seen to emphasize extending expansive regulatory and legal frameworks from the ground up where infrastructure already exists, in contrast to creating a new centralized regulatory framework.
+
+Because the US approach involves over fifty federal agencies, it is also much more extensive in implementation details than the EU. It directly addresses broader issues like unemployment, education, research, and consumer protection. Finally, and again in contrast to the EU AI Act, this US strategy is arguably more immediately actionable given the over one hundred specific objectives. Many deadlines are delegated to federal agencies to be completed within 180 to 270 days. These agencies are already specialized across a broad spectrum of existing federal government responsibilities that are being disrupted by AI.  As of this writing, both the White House 180-day and 270-day deadlines have been met~\citep{whitehouse2024b, whitehouse2024d}.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}c >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{2.8cm} X@{}}
+\toprule
+\textbf{Relevance} & \textbf{Policy Area} & \textbf{Requirements / Entities} & \textbf{Federal Entities *} \\
+\midrule
+\multirow{3}{*}{\textbf{High}}
+  & Federal use of AI        & 29 requirements, 40 entities & OMB, OPM, CFO, GSA, etc. \\
+  & Safety and security      & 27 requirements, 30 entities & NIST, DOE, DOC, SRMA, Treasury, DHS, DOD \\
+  & Innovation and competition & 21 requirements, 10 entities & DOS, DHS, DOL, NSF, USPTO, HHS, VA, DOE, PCAST, OSTP+ \\
+\midrule
+\multirow{4}{*}{\textbf{Medium}}
+  & AI bias and civil rights & 9 requirements, 8 entities  & DOJ, OPM, HHS, USDA, DOL, HUD, DHS, OSTP \\
+  & Consumer protection      & 9 requirements, 5 entities  & HHS, DOT, ED, DOD, VA \\
+  & Privacy                  & 6 requirements, 9 entities  & OMB, NIST, NSF, FPC, ICSP, DOJ, CEA, OSTP, DOE \\
+  & International leadership & 6 requirements, 7 entities  & DOC, DOS, USAID, DHS, NIST, DOE, NSF \\
+\midrule
+\textbf{Low}
+  & Worker support           & 4 requirements, 2 entities  & CEA, DOL \\
+\bottomrule
+\end{tabularx}
+\caption{Executive Order \#14110 on the Safe, Secure, and Trustworthy Development and Use of AI (* see Appendix~A for agency acronyms).}
+\label{tab:us_eo14110}
+\end{table}
+
+Enforcement is another major area of difference between the EU and the US. The EU AI Acts' risk model is premised upon prevention. General guidelines, specific penalties, and centralized regulation prohibit activities unless explicitly permitted. In contrast, the current US risk model is permissive. It promotes innovation through competition, encourages decentralized self-regulation, and relies upon an extensive network of existing laws and regulations against abusive, illegal, and negligent practices. These networks of existing laws range over a wide spectrum, extending from specific consumer protection laws to evolving intellectual property laws~\citep{walters2022}. This permissive approach follows the American tradition of tech sector self-regulation with its notable success in sectors like online advertising (DAA, NAI), cybersecurity (NIST, CISA), biotechnology (IGSC, IASB), nanotechnology (ISO, NanoRisk), and cloud computing (CSA).
+
+Within this permissive structure, and in response to the White House EO 14110, the National Institute of Standards and Technology~\citep{nist2024a} established the US AI Safety Institute in January of 2024. Housed within the larger Department of Commerce, NIST was originally established to facilitate U.S. industrial competitiveness. The US AI Safety Institute has members from academia, industry, and nonprofits. This partnership mirrors the kind of decentralized and voluntary approach discussed earlier. The US AI Safety Institute's initial task forces focus on safety, evaluation, measurement, and risk management. Their work follows upon the initial Risk Management Framework published in April 2024~\citep{nist2024b}. On July 12 2024 representatives from the US AI Safety Institute and the European AI Office met in Washington, D.C. and announced plans for further cooperation and collaboration~\citep{nist2024c}.
+
+\subsubsection{Revocation under the Trump Administration}
+
+On January 20, 2025, President Trump revoked EO~\#14110 on his first day in office. Three days later, he signed Executive Order 14179, ``Removing Barriers to American Leadership in Artificial Intelligence''~\citep{trump2025eo14179}, which establishes a policy of sustaining US AI dominance through economic competitiveness and national security while directing agencies to rescind policies stemming from the Biden order. The replacement order mandates an AI Action Plan within 180 days but contains no specific safety requirements, reporting obligations, or compliance deadlines---a stark contrast to EO~\#14110's hundred-plus delegated tasks. This shift reinforces the US position in the distributed, ex post quadrant of the governance typology: where Biden sought to coordinate federal agencies around proactive safety standards, the Trump approach returns to market-driven development with minimal centralised oversight.
+
+% Prevent the figure from moving out of this section
+\FloatBarrier
+
+\subsection{California SB 1047}
+
+% Prevent the figure from moving out of this section
+\FloatBarrier
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/fig_casb1047_timeline.pdf}
+    \caption{Action Timeline for SB 1047}
+    \label{fig:fig_sb1047_timeline}
+\end{figure}
+
+The California Senate Bill 1047 (SB 1047: Safe and Secure Innovation for Frontier AI Models Act), introduced in February 2024 by Senator Scott Wiener, attempts to minimize potential negative societal impacts of AI in the face of rapid progress~\citep{LegiScan2024}. The bill emerged in response to growing concerns about the unique threats posed by powerful AI systems~\citep{gdprlocal2024}. It would affect nearly every leading AI company either based in Silicon Valley or doing business with California, the 5th largest economy in the world.
+
+SB 1047 aimed to establish a regulatory framework focused narrowly on ``frontier models'' defined by computational resources~\citep{ktslaw2024}. The bill attracted both broad support---from AI researchers, unions, and some technology companies~\citep{thehill_ai_supporters_2024, lovely2024, verge2024}---and vigorous opposition from industry groups and open-source advocates who argued it could stifle innovation and favour incumbents~\citep{nunez2024, abbott2024coalition_2024, chilson_coalition_letter_2024}. Notably, opinions were split within traditional interest groups, with leading researchers and politicians on both sides of the debate. After multiple revisions that narrowed pre-harm enforcement provisions and clarified definitions of ``covered models''~\citep{LegiScan2024}, the bill reached the Governor's desk.
+
+Unlike the EU AI Act's comprehensive risk-based approach across sectors, SB~1047 focuses narrowly on high-impact systems defined by computational resources~\citep{cmswire2024, euronews2024}. This reflects a distinct regulatory philosophy in which the \textit{technical potential} of AI systems---rather than their deployment context---is the primary trigger for regulation, a choice that would prove central to the bill's eventual veto~\citep{uchicagobusinesslaw2024}.
+
+\subsubsection{Proposed Requirements}
+
+As shown in Figure~\ref{fig:fig_sb1047_timeline}, SB~1047 proposed escalating requirements across four phases: immediate cybersecurity and safety protocol obligations; mandatory third-party audits and 72-hour incident reporting by January 2026; a new Board of Frontier Models issuing annual regulations by January 2027; and ongoing monitoring with whistleblower protections. Enforcement authority would rest with the Attorney General, with civil penalties calculated based on model training compute costs~\citep{smdailyjournal2024}.
+
+\subsubsection{Veto and After Effects}
+
+On September 29th 2024, Governor Newsom vetoed SB 1047 \citep{newsom2024veto} because he opposed standards solely based on model size and computational resources. Instead, he said it was necessary to consider whether AI systems would be deployed in high-risk environments and involve critical decision-making. As an alternative, Newsom will consult with  AI experts to develop more targeted guardrails for AI deployment and work with the legislature on more empirically-based regulation. Despite the veto, SB 1047 has significantly impacted the AI regulation debate by:
+
+\begin{itemize}
+    \item Highlighting the need for proactive safety measures and accountability in AI development.
+    \item Sparking discussions on the appropriate metrics for regulating AI, such as computational resources versus actual risks and impacts.
+    \item Raising awareness about potential catastrophic risks associated with advanced AI systems.
+    \item Demonstrating the challenges of balancing innovation with safety concerns.
+    \item Encouraging industry stakeholders, startups, investors, and open-source developers to seriously consider AI safety and governance in their strategic planning.
+\end{itemize}
+
+The bill and subsequent veto have also revealed tensions between state-level and national approaches to AI regulation, as well as unlikely divisions and alliances within academia, industry, and government (see Appendix A). Many argue that a federal framework would be the more effective place to address AI regulation. Nonetheless, the debate over California SB 1047 will undoubtedly influence future regulatory efforts at both state and federal levels and could lead to more nuanced and effective AI regulation. Indeed, Governor Newsom has signed 17 AI-related bills in the month before his SB 1047 veto and established new initiatives with the CA legislature and AI experts to establish workable guardrails and empirical, science-based trajectory analysis of frontier models \citep{newsom2024postveto}.
+
+\subsubsection{State-Level Successors: SB 53 and the RAISE Act}
+
+The SB~1047 debate catalysed a wave of state-level AI legislation in 2025. California enacted SB~53, the Transparency in Frontier Artificial Intelligence Act~\citep{casb53_2025}, on September 29, 2025---exactly one year after the SB~1047 veto. SB~53 shifts from SB~1047's prescriptive safety mandates to a transparency-centred approach: developers of frontier models (trained at $>10^{26}$ operations) must publish annual risk-governance frameworks, issue pre-deployment transparency reports, and report critical safety incidents within 15 days. New York followed with the RAISE Act~\citep{ny_raise_2025} in December 2025, requiring annual independent audits and 72-hour incident reporting for frontier model developers. These successor laws suggest that US AI governance is coalescing around transparency and disclosure obligations rather than the ex ante safety requirements that SB~1047 proposed.
+
+% ──────────────────────────────────────────────
+\section{Discussion and Conclusion}
+% ──────────────────────────────────────────────
+
+% NOTE TO AUTHORS: This section synthesises findings through the theoretical
+% framework and adds explicit European policy implications. Please review carefully.
+
+\subsection{Comparative Synthesis}
+
+Applying the governance typology introduced in Section~2, a clear pattern emerges. The EU occupies the centralised, ex ante quadrant: the AI Act establishes a comprehensive, risk-based framework that regulates AI systems \textit{before} they reach the market, enforced through a new centralised authority (the EU AI Office). The US occupies the distributed, ex post quadrant: EO~\#14110 delegates responsibilities across more than fifty existing federal agencies, relies heavily on industry self-regulation, and enforces standards primarily through existing legal frameworks after harms materialise. China occupies a hybrid position: centralised guidance and registration requirements coexist with decentralised, sector-specific enforcement and deliberate regulatory forbearance for innovative SMEs.
+
+These positions are not static, but institutional traditions exert a gravitational pull. The veto of California's SB~1047 and the Trump administration's revocation of EO~\#14110 in January 2025~\citep{trump2025eo14179} both illustrate this dynamic: Governor Newsom rejected ex ante thresholds based on model size in favour of ex post, deployment-context assessment, while the Trump order dismantled the Biden-era coordination framework entirely in favour of market-led development. Notably, however, state-level successors---California's SB~53~\citep{casb53_2025} and New York's RAISE Act~\citep{ny_raise_2025}---suggest that transparency-based regulation is emerging as a pragmatic middle ground within the US system.
+
+The Brussels Effect thesis receives partial support from this analysis. The EU AI Act's extraterritorial reach (applying to any AI system whose output is used within the EU) creates compliance incentives for global firms. However, the simultaneous emergence of substantive regulatory frameworks in both the US and China limits the unilateral standard-setting power that the EU enjoyed with the GDPR. Rather than a single Brussels Effect, AI governance may be evolving toward a \textit{multipolar regulatory landscape} in which firms must navigate competing compliance regimes.
+
+\subsection{Implications for European Policy}
+
+This comparative analysis yields several concrete implications for European policymakers and the EU AI Office as the AI Act enters its implementation phase.
+
+First, the EU's \textit{adaptive legislation} approach---deliberately leaving technical details for later specification---is both a strength and a vulnerability. While it permits adjustment to technological change, it also creates prolonged regulatory uncertainty. The Chinese experience with sector-specific regulations demonstrates that more targeted, use-case-driven rules can be implemented faster and with less ambiguity, even if they sacrifice systemic coherence. European policymakers should prioritise rapid issuance of sector-specific implementing guidance, particularly for high-risk applications in healthcare, employment, and law enforcement.
+
+Second, the treatment of open-source AI models remains a critical unresolved tension. The EU Act's partial exemptions for open-source providers are narrower than the de facto permissive environment in both the US and China. If these provisions impose disproportionate compliance costs on European open-source developers, they risk accelerating the technology gap that the Act partly aims to address. Monitoring the competitive effects of the open-source provisions should be an early priority for the AI Office.
+
+Third, the US experience offers a cautionary lesson in regulatory durability. EO~\#14110 achieved over one hundred compliance milestones within 270 days by leveraging existing federal agencies---yet the entire framework was revoked with a single presidential signature in January 2025~\citep{trump2025eo14179}. This underscores the advantage of the EU's legislative approach: unlike executive orders, the AI Act cannot be unilaterally rescinded, providing the regulatory stability that firms need for long-term compliance investment. The EU AI Office should nonetheless build strategic partnerships with member-state regulators who already possess domain expertise to accelerate effective implementation.
+
+Finally, growing geopolitical competition between the US and China is reshaping the global regulatory environment. Increased tariffs, export controls on advanced chips and semiconductor equipment, and sanctions on strategic technologies mean that AI regulation cannot be analysed in isolation from industrial and trade policy. For the EU, this creates both risk and opportunity: risk that innovation-focused deregulation elsewhere erodes the Brussels Effect, but opportunity to position European standards as a trusted ``third way'' between US permissiveness and Chinese state control, particularly for developing nations seeking regulatory models to adopt.
+
+% ──────────────────────────────────────────────
+\section*{Author Contributions}
+\addcontentsline{toc}{section}{Author Contributions}
+% ──────────────────────────────────────────────
+Jon Chun led the analysis of the United States and China sections. Christian Schroeder de Witt led the analysis of the European Union section. Katherine Elkins contributed to the United States section. All authors contributed to the theoretical framework, methodology, and comparative synthesis. Each author has reviewed the complete manuscript.
+
+% ──────────────────────────────────────────────
+% Author biographies (IPR requirement)
+% ──────────────────────────────────────────────
+\section*{About the Authors}
+\addcontentsline{toc}{section}{About the Authors}
+
+\textbf{Jon Chun} is at Kenyon College. His research focuses on AI policy and regulation.
+
+\textbf{Christian Schroeder de Witt} is at the University of Oxford. His research focuses on AI safety and governance.
+
+\textbf{Katherine Elkins} is at Kenyon College. Her research spans AI, digital humanities, and policy.
+
+% Prevents floating elements from causing a blank page
+\FloatBarrier
+
+% ──────────────────────────────────────────────
+% References
+% ──────────────────────────────────────────────
+\printbibliography
+
+% Insert a new page before Appendix A
+\clearpage
+
+% Start Appendix A with the correct title
+\section*{Appendix A: Sample of Diverse Supporters and Opponents of California SB 1047}
+\addcontentsline{toc}{section}{Appendix A: Sample of Diverse Supporters and Opponents of California SB 1047}
+
+\small
+% Use longtable to allow the table to span multiple pages
+\begin{longtable}{|p{0.12\textwidth}|p{0.18\textwidth}|p{0.20\textwidth}|p{0.40\textwidth}|}
+\hline
+\textbf{Side} & \textbf{Category} & \textbf{Name} & \textbf{Description} \\ \hline
+Pro & Politician & Sen. Anthony Wiener & \url{https://tinyurl.com/4ub8u7ha} \\ \hline
+Pro & Academics & Yoshua Bengio, Geoffrey Hinton, Lawrence Lessig, Stuart Russell & \url{https://safesecureai.org/experts} \\ \hline
+Pro & Academic & Dan Hendrycks & \url{https://tinyurl.com/ytn7vcfr} \\ \hline
+Pro & AI Researchers & Call to Lead & \url{https://calltolead.org/} \\ \hline
+Pro & AI Non-Profit & Center for AI Safety & \url{https://www.safe.ai/work/statement-on-ai-risk} \\ \hline
+Pro & AI Frontier Corp & OpenAI & \url{https://tinyurl.com/2s42ndr5} \\ \hline
+Pro & AI Frontier Corp & Anthropic & \url{https://tinyurl.com/yth2k2hn} \\ \hline
+Pro & Hollywood & Actors and Unions & \url{https://tinyurl.com/4ad85wzu} \\ \hline
+Pro & Entrepreneur & Elon Musk & \url{https://x.com/elonmusk/status/1828205685386936567} \\ \hline
+Con & Politician & Sen. Nancy Pelosi & \url{https://tinyurl.com/y25yrre9} \\ \hline
+Con & Politician & Rep. Ro Khanna & \url{https://tinyurl.com/3sz3jwns} \\ \hline
+Con & Politician & SF Mayor London Breed & \url{https://tinyurl.com/3664wwua} \\ \hline
+Con & Academic & Yan LeCun & \url{https://x.com/ylecun/status/1807552057466909156} \\ \hline
+Con & Academic & Fei-Fei Li & \url{https://tinyurl.com/4b9uzctb} \\ \hline
+Con & Academics & CalTech & \url{https://tinyurl.com/2xf6xcw5} \\ \hline
+Con & AI Frontier Corp & Meta & \url{https://tinyurl.com/y2sus9xp} \\ \hline
+Con & AI Frontier Corp & Google & \url{https://tinyurl.com/adseybwp} \\ \hline
+Con & AI Non-Profit & The AI Alliance & \url{https://thealliance.ai/core-projects/sb1047} \\ \hline
+Con & Thought Leaders & Investors, Entrepeneurs and Academics & \url{https://tinyurl.com/26h9f397} \\ \hline
+\caption{Split among leading voices on California SB 1047 does not follow traditional dividing lines}
+\end{longtable}
+
+\end{document}
