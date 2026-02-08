@@ -1,0 +1,29 @@
+TEX      = pdflatex
+BIB      = biber
+MAIN     = main
+PANDOC   = pandoc
+
+.PHONY: pdf docx wordcount clean
+
+pdf: $(MAIN).pdf
+
+$(MAIN).pdf: $(MAIN).tex $(MAIN).bib
+	$(TEX) $(MAIN)
+	$(BIB) $(MAIN)
+	$(TEX) $(MAIN)
+	$(TEX) $(MAIN)
+
+docx: $(MAIN).docx
+
+$(MAIN).docx: $(MAIN).tex $(MAIN).bib
+	$(PANDOC) $(MAIN).tex \
+		--from latex \
+		--to docx \
+		-o $(MAIN).docx
+
+wordcount:
+	@texcount -inc -total $(MAIN).tex 2>/dev/null || \
+		echo "texcount not found — install via: sudo tlmgr install texcount"
+
+clean:
+	rm -f $(MAIN).{aux,bbl,bcf,blg,ent,fdb_latexmk,fls,log,out,run.xml,synctex.gz,toc,pdf,docx}
