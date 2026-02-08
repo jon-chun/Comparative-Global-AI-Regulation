@@ -2,7 +2,7 @@
 
 **Project:** Comparative Global AI Regulation
 **Authors:** Jon Chun, Christian Schroeder de Witt, Katherine Elkins
-**Date:** 2026-02-07
+**Date:** 2026-02-08
 
 ---
 
@@ -13,8 +13,8 @@ Three papers derive from the same underlying research programme --- a comparativ
 | # | Paper | Venue | Status | Words |
 |---|---|---|---|---|
 | 1 | arXiv preprint | arXiv (2410.21279) | **Published** (Oct 2024) | ~7,500 |
-| 2 | IPR paper | Internet Policy Review | **Ready for submission** | 7,726 |
-| 3 | JCP paper | Journal of Cyber Policy | **Ready for submission** | 6,100 |
+| 2 | IPR paper | Internet Policy Review | **Ready for submission** | 7,503 |
+| 3 | JCP paper | Journal of Cyber Policy | **Ready for submission** | 6,061 |
 
 ---
 
@@ -128,19 +128,23 @@ All files are in the `papers/` directory:
 ### IPR paper (ready for submission)
 - `papers/ipr2026/main.tex` --- source
 - `papers/ipr2026/main.bib` --- bibliography
-- `papers/ipr2026/main.pdf` --- compiled PDF (28 pages, 7,726 words)
+- `papers/ipr2026/main.pdf` --- compiled PDF (28 pages, 7,503 words)
 - `papers/ipr2026/main.docx` --- Word version
 
 ### JCP paper (ready for submission)
 - `papers/jcp2026/main.tex` --- source (endnotes enabled)
 - `papers/jcp2026/main.bib` --- bibliography (with cyber governance entries)
-- `papers/jcp2026/main.pdf` --- compiled PDF (30 pages, 6,100 words, Chatham House endnotes)
+- `papers/jcp2026/main.pdf` --- compiled PDF (30 pages, 6,061 words, Chatham House endnotes)
 - `papers/jcp2026/main.docx` --- Word version
 - `papers/jcp2026/abstract-pitch.md` --- 249-word standalone abstract
 - `papers/jcp2026/cover-letter.md` --- cover letter disclosing companion papers
 - `papers/jcp2026/email-hakmeh.md` --- inquiry email to commissioning editor
 - `papers/jcp2026/jcp2026_pub-plan.md` --- JCP-specific publication plan and gap analysis
 - `papers/jcp2026/jcp2026_critiques.md` --- critique report with implementation log
+
+### Editing audit
+- `papers/edit_humanize.md` --- humanizing revision audit log (131 edits across 3 passes)
+- `papers/edit_humanizing-heuristics.md` --- heuristics guide for AI-writing detection
 
 ### This document
 - `papers/multi-paper_pub-plan.md` --- multi-paper publication strategy (this file)
