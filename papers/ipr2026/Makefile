@@ -1,6 +1,6 @@
 TEX      = pdflatex
 BIB      = biber
-MAIN     = main
+MAIN     = ipr2026_comparative-global-ai-regulation
 PANDOC   = pandoc
 
 .PHONY: pdf docx wordcount clean

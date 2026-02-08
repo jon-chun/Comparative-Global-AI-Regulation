@@ -1,6 +1,6 @@
 TEX      = pdflatex
 BIB      = biber
-MAIN     = main
+MAIN     = jcp2026_cyber-governance-trilemma
 PANDOC   = pandoc
 
 .PHONY: pdf docx wordcount clean
