@@ -1,6 +1,6 @@
 # Humanising Revision Audit
 
-**Date:** 2026-02-07
+**Date:** 2026-02-07 (passes 1--3), 2026-02-08 (passes 4--5)
 **Heuristics applied from:** `papers/edit_humanizing-heuristics.md`
 **Papers revised:** IPR 2026 (`papers/ipr2026/main.tex`), JCP 2026 (`papers/jcp2026/main.tex`)
 **Constraint:** No changes to facts, statistics, citations, or substantive content.
@@ -11,7 +11,7 @@
 
 | Metric | IPR | JCP | Total |
 |---|---|---|---|
-| Edits applied | 21 | 14 | 35 |
+| Edits applied (all passes) | 72 | 75 | 147 |
 | "Importantly" removed | 5 | 0 | 5 |
 | "comprehensive" replaced | 3 | 1 | 4 |
 | "Furthermore/Additionally" removed | 2 | 0 | 2 |
@@ -1699,3 +1699,49 @@ Each paper retains exactly 3 em-dashes in body text, chosen for maximum rhetoric
 
 **Non-body em-dashes preserved:**
 - IPR header: `Internet Policy Review --- Draft` (line 31, preamble formatting)
+
+---
+
+## Passes 4--5: IPR Residual Pattern Cleanup (16 edits)
+
+**Date:** 2026-02-08
+**Paper:** IPR only (JCP was not edited in passes 4--5)
+**Focus:** Residual AI-tell vocabulary, mirror-structure parallelism, semicolon triplets, sentence uniformity, copula avoidance, bullet-to-prose conversion, formulaic transitions.
+
+### Updated Cumulative Statistics
+
+| Metric | Pass 1 | Pass 2 | Pass 3 | Pass 4 | Pass 5 | Total |
+|---|---|---|---|---|---|---|
+| IPR edits | 21 | 16 | 19 | 2 | 14 | 72 |
+| JCP edits | 14 | 14 | 47 | 0 | 0 | 75 |
+| **Total edits** | **35** | **30** | **66** | **2** | **14** | **147** |
+
+### Pass 4 (2 edits)
+
+| # | Pattern | Before | After | Location |
+|---|---|---|---|---|
+| 1 | H3.3 (formulaic opening) | "a clear pattern emerges" | "the three cases fall into distinct quadrants" | Discussion (~line 474) |
+| 2 | H1.1 (Tier 1: "comprehensive") | "the most comprehensive framework" | "the broadest framework" | Discussion (~line 490) |
+
+### Pass 5 (14 edits)
+
+| # | Pattern | Before | After | Location |
+|---|---|---|---|---|
+| 1 | H1.1 Tier 3 | "significant implications" | "direct implications" | Abstract (~line 130) |
+| 2 | B1 (landscape) | "regulatory landscape" | "regulatory environment" | Intro (~line 139) |
+| 3 | C5 (mirror structure) | "The EU has... China has... The US has..." | "In the EU... Chinese regulators have... In the US..." | Intro (~line 141) |
+| 4 | C4 (uniformity) | Long opening sentence (split for burstiness) | Two sentences: short (9 words) + medium | Theory (~line 154) |
+| 5 | A3 (semicolon triplet) | "EU favours X; US favours Y; and China..." | Two separate sentences with varied structure | Theory (~line 156) |
+| 6 | B3 (copula) | "represents complex joint efforts" | "emerged from complex negotiations" | EU Overview (~line 188) |
+| 7 | H1.1 Tier 3 | "significant adjustments" | "major adjustments" | EU Overview (~line 192) |
+| 8 | H1.1 Tier 3 | "significant extraterritorial reach" | "considerable extraterritorial reach" | EU Laws (~line 202) |
+| 9 | H4.1 (transition) | "Furthermore, the deployment..." | "The deployment... are also prohibited" | EU Risks (~line 226) |
+| 10 | C5 (mirror) + C4 | "Like the EU... Like the US..." | "China's approach is a hybrid." (8-word opener) + elaboration | China Overview (~line 270) |
+| 11 | B3 (copula) + H1.1 | "represented the most comprehensive form" | "was the most far-reaching" | US Overview (~line 365) |
+| 12 | H6.3 (bullets → prose) | 3-item `\begin{itemize}` | Inline prose with commas | US Overview (~line 365) |
+| 13 | H1.1 Tier 1 | "comprehensive risk-based approach" | "broad risk-based approach" | US SB 1047 (~line 446) |
+| 14 | C5 (mirror structure) | "EU occupies... US occupies... China occupies..." | "EU sits in... At the opposite corner, US distributes... China falls between..." | Discussion (~line 468) |
+
+Full before/after details for all 16 edits are documented in `papers/ipr2026/ipr2026_edit-humanize.md`.
+
+**Word count after pass 5:** IPR = 8,247 words (down from 8,321 after pass 4).
