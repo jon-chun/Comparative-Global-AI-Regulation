@@ -6,28 +6,31 @@
 
 ---
 
-## Summary of Changes (Both Passes)
+## Summary of Changes (All Three Passes)
 
-| Category | Pass 1 | Pass 2 | Heuristic(s) |
-|---|---|---|---|
-| Significance inflation / inflated phrasing | 8 | 0 | B4, D4 |
-| Em dash removal | 3 | 0 | A1 |
-| "Landscape" / "ecosystem" replacement | 5 | 0 | B1, B2 |
-| Negative parallelism ("not merely X --- it is Y") | 3 | 0 | C2 |
-| Copula avoidance ("is positioned as", "functions as") | 3 | 0 | B3 |
-| Formulaic transitions | 3 | 1 | C3 |
-| False specificity ("over fifty") | 2 | 0 | D5 |
-| Sentence length variation / rhythm | 6 | 1 | C4 |
-| Generic conclusion softened | 1 | 1 | D1 |
-| Mirror-structure comparisons varied | 2 | 7 | C5 |
-| "The [noun]" repetitive openings | 0 | 5 | C3, C4 |
-| Italic mini-headers (listicle) eliminated | 0 | 1 | C1 (list pattern) |
-| Single-sentence paragraphs merged | 0 | 2 | C4 |
-| Short 2-sentence paragraphs merged | 0 | 2 | C4 |
-| Gratuitous rule-of-three reduced | 0 | 3 | C1 |
-| Miscellaneous de-AI phrasing | 8 | 0 | Various |
+| Category | Pass 1 | Pass 2 | Pass 3 | Heuristic(s) |
+|---|---|---|---|---|
+| Significance inflation / inflated phrasing | 8 | 0 | 1 | B4, D4 |
+| Em dash removal | 3 | 0 | 0 | A1 |
+| "Landscape" / "ecosystem" replacement | 5 | 0 | 0 | B1, B2 |
+| Negative parallelism ("not merely X --- it is Y") | 3 | 0 | 1 | C2 |
+| Copula avoidance ("is positioned as", "functions as") | 3 | 0 | 0 | B3 |
+| Formulaic transitions | 3 | 1 | 1 | C3 |
+| False specificity / redundancy | 2 | 0 | 1 | D5 |
+| Sentence length variation / rhythm | 6 | 1 | 1 | C4 |
+| Generic conclusion softened | 1 | 1 | 1 | D1 |
+| Mirror-structure comparisons varied | 2 | 7 | 0 | C5 |
+| "The [noun]" repetitive openings | 0 | 5 | 0 | C3, C4 |
+| Italic mini-headers (listicle) eliminated | 0 | 1 | 0 | C1 (list pattern) |
+| Single-sentence paragraphs merged | 0 | 2 | 0 | C4 |
+| Short 2-sentence paragraphs merged | 0 | 2 | 0 | C4 |
+| Gratuitous rule-of-three reduced | 0 | 3 | 0 | C1 |
+| Elegant variation / word repetition | 0 | 0 | 10 | D2 |
+| Vague attribution / hedging | 0 | 0 | 1 | D6 |
+| Superficial -ing tack-on | 0 | 0 | 1 | D3 |
+| Miscellaneous de-AI phrasing | 8 | 0 | 0 | Various |
 
-**Total: Pass 1 = 44 edits, Pass 2 = 23 edits, Combined = 67 edits**
+**Total: Pass 1 = 44 edits, Pass 2 = 23 edits, Pass 3 = 18 edits, Combined = 85 edits**
 
 ---
 
@@ -402,12 +405,71 @@ A second-pass audit identified and fixed the following remaining AI patterns.
 
 ---
 
+## Pass 3: Residual Word Repetition and Minor Patterns
+
+A final heuristic scan using the humanizer skill identified 10 low-severity residual patterns. None would individually flag the paper as AI-generated, but collectively they merited cleaning. All were fixed with 18 edits.
+
+### FIX P3-1. "deliberate/deliberately" x7 reduced to x2 (LOW)
+- Line 204: `This regulatory overlap is deliberate:` -> `This regulatory overlap is by design:`
+- Line 232: `a deliberate attempt` -> `a calculated attempt`
+- Line 271: `enforcement is deliberately selective` -> `enforcement is selective by design`
+- Line 273: `the deliberate legislative adoption` -> `the conscious legislative adoption`
+- Line 327: `deliberate regulatory forbearance` -> `calculated regulatory forbearance`
+- KEPT: Line 234 (`This consolidation is deliberate`) and line 391 (`deliberately erases`).
+- REASON: Seven uses of one word family across 200 lines; conspicuous repetition (D2).
+
+### FIX P3-2. "structural/structurally" x8 reduced to x3 (LOW)
+- Line 149: `structural factors` -> `underlying factors`
+- Line 341: `structurally incompatible with EU transparency standards` -> `fundamentally incompatible with EU transparency standards`
+- Line 352: `structurally incompatible with multi-stakeholder governance models` -> `inherently incompatible with multi-stakeholder governance models`
+- Line 393: `the trilemma structurally impedes` -> `the trilemma inherently impedes`
+- Line 399: `a structural feature of cyber governance` -> `a persistent feature of cyber governance`
+- KEPT: Lines 305 (`structural vulnerability`), 337 (`structural incompatibility`), 350 (figure caption `structural trade-off`).
+- REASON: Eight uses in 100 lines; term-of-art in trilemma discussion justifies retaining three (D2).
+
+### FIX P3-3. "widely" x2 in adjacent subsections (LOW)
+- Line 208: `the Act is widely regarded as` -> `the Act is often regarded as`
+- KEPT: Line 202 (`widely described as`).
+- REASON: Two "widely" within 6 lines (B4, D4).
+
+### FIX P3-4. "It is speculated that" vague attribution (LOW)
+- Line 208: `It is speculated that companies across the world will begin to prioritise` -> `The logic is that companies across the world will prioritise`
+- REASON: Passive/vague attribution; also dropped unnecessary "begin to" (D6).
+
+### FIX P3-5. "more than fifty...more than one hundred" redundancy (LOW)
+- Line 297: `EO~#14110 directed more than fifty federal agencies to take more than one hundred specific actions addressing eight policy areas` -> `The order's directives addressed eight policy areas`
+- REASON: Same fact stated verbatim 10 lines earlier on line 287 (D5).
+
+### FIX P3-6. "Less obvious but no less important is the" formulaic transition (LOW)
+- Line 341: `Less obvious but no less important is the \textit{safety--interoperability tension}.` -> `The \textit{safety--interoperability tension} gets less attention but binds just as tightly.`
+- REASON: Formulaic transition with mild significance inflation (C3, B4).
+
+### FIX P3-7. Tacked-on "-ing" in abstract (LOW)
+- Line 111: `a cyber risk, creating compliance gaps that sophisticated threat actors can exploit and complicating international norm-building processes` -> `a cyber risk: it creates compliance gaps that sophisticated threat actors can exploit and complicates international norm-building`
+- REASON: Participial "complicating" tacked on at end of long sentence; colon construction is more direct (D3).
+
+### FIX P3-8. "for years to come" generic temporal ending (LOW)
+- Line 399: `will shape international cyber governance for years to come` -> `will shape international cyber governance`
+- REASON: Generic temporal vagueness; the final sentence ("There is little reason to expect convergence any time soon") already provides temporal context (D1).
+
+### FIX P3-9. "not only...but" negative parallelism (LOW)
+- Line 125: `arguing that jurisdictions are now racing not only to develop AI but to set the rules governing it` -> `arguing that jurisdictions now race to regulate AI as much as to develop it`
+- REASON: Surviving negative parallelism; simpler phrasing preserves Smuha's point (C2).
+
+### FIX P3-10. Uniform sentence length in Introduction paragraph 2 (LOW)
+- Line 123: `Where cybersecurity once centred on technical standards and incident response, the governance challenge has expanded to encompass the foundational question of how societies choose to develop, deploy, and constrain AI.` -> `Cybersecurity governance once centred on technical standards and incident response. The challenge now goes further: how should societies develop, deploy, and constrain AI?`
+- REASON: All three sentences in the paragraph were 35-50 words; split creates 10-word + 15-word pair for burstiness (C4).
+
+---
+
 ## Patterns NOT Changed (Intentional Retention)
 
 - **Trilemma's three vertices** (innovation, safety, interoperability): Core analytical framework; triplet is substantive.
 - **Enumerated list** (lines 337-341): Formal definition of the trilemma; enumeration appropriate.
 - **EU/US/China parallel comparisons in tables and figures**: Tabular data retains parallel structure by convention.
-- **Line 125 "not only...but"**: Paraphrasing Smuha's published argument; changing would misrepresent the source.
 - **Author bios** (lines 418--422): "serves as" in bio sections follows CV convention.
-- **Section headings**: Already in sentence case; no title-case issues detected.
+- **Section headings**: Title case retained per Taylor & Francis journal style.
 - **Line 129 "First/Second/Third" contributions**: Standard academic convention for stating paper contributions.
+- **"Crucially" (line 212)**: Single use; acceptable in academic register.
+- **"deliberate" (lines 234, 391)**: Two surviving uses in distinct contexts; no longer conspicuous.
+- **"structural" (lines 305, 337, 350)**: Three surviving uses; term-of-art within the trilemma argument.
