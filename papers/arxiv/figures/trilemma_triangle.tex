@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[paperwidth=12cm,paperheight=9cm,margin=0.3cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
+\pagestyle{empty}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[
+    vertex/.style={font=\bfseries\small, align=center, text width=3cm},
+    jurisdiction/.style={font=\small, align=center, fill=white, inner sep=2pt, rounded corners=2pt},
+    tension/.style={font=\scriptsize\itshape, align=center, text width=2.2cm}
+]
+
+% Triangle vertices
+\coordinate (top) at (0, 5.5);
+\coordinate (bl) at (-4.5, 0);
+\coordinate (br) at (4.5, 0);
+
+% Draw triangle
+\draw[thick] (top) -- (bl) -- (br) -- cycle;
+
+% Vertex labels
+\node[vertex, above=4pt of top] {Innovation\\Speed};
+\node[vertex, below left=4pt of bl] {Safety \&\\Rights Protection};
+\node[vertex, below right=4pt of br] {Regulatory\\Interoperability};
+
+% Tension labels on edges
+\node[tension] at ($(top)!0.5!(bl) + (-1.3, 0.2)$) {Innovation--safety\\tension};
+\node[tension] at ($(bl)!0.5!(br) + (0, -0.6)$) {Safety--interoperability tension};
+\node[tension] at ($(top)!0.5!(br) + (1.3, 0.2)$) {Innovation--interop.\\tension};
+
+% Jurisdiction positions
+\node[jurisdiction, fill=blue!8] at ($(top)!0.55!(br) + (0.1, 0.3)$) {United States\\{\scriptsize (innovation + partial interop.)}};
+
+\node[jurisdiction, fill=green!8] at ($(bl)!0.45!(br) + (0, 0.7)$) {European Union\\{\scriptsize (safety + interoperability)}};
+
+\node[jurisdiction, fill=red!8] at ($(top)!0.55!(bl) + (-0.1, 0.3)$) {China\\{\scriptsize (innovation + selective safety)}};
+
+\end{tikzpicture}
+\end{document}

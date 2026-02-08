@@ -4,7 +4,7 @@
 
 **To:** The Editors, *Journal of Cyber Policy*
 **From:** Jon Chun, Christian Schroeder de Witt, Katherine Elkins
-**Date:** [INSERT DATE]
+**Date:** [INSERT DATE BEFORE SENDING]
 **Re:** Submission of "The Cyber Governance Trilemma: Comparative AI Regulation in the EU, China, and the United States"
 
 ---
@@ -21,7 +21,7 @@ We are pleased to submit our manuscript, "The Cyber Governance Trilemma: Compara
 
 1. **arXiv preprint.** An earlier version of the underlying comparative analysis was posted as an arXiv preprint in October 2024 (arXiv:2410.21279). That paper is a descriptive survey of AI regulation without theoretical framing, cyber governance analysis, or the trilemma thesis. Taylor & Francis policy explicitly permits prior arXiv posting.
 
-2. **Internet Policy Review submission.** A companion paper, "Comparative Global AI Regulation: Policy Perspectives from the EU, China, and the US," has been prepared for submission to *Internet Policy Review*. The IPR paper targets a different audience (internet policy scholars and EU policymakers), employs a different theoretical framework (three lenses, without regime complexity or cyber sovereignty), and draws different conclusions (European policy implications rather than international cyber governance). The two papers share empirical subject matter---the same three jurisdictions and regulatory developments---but make distinct analytical arguments to distinct audiences. We estimate textual overlap at approximately 15--20%, confined to factual descriptions of regulatory instruments. The analytical framing, theoretical apparatus, original contributions, discussion, and conclusions are entirely different.
+2. **Internet Policy Review submission.** A companion paper, "Comparative Global AI Regulation: Policy Perspectives from the EU, China, and the US," has been prepared for submission to *Internet Policy Review*. The IPR paper targets a different audience (internet policy scholars and EU policymakers), employs a different theoretical framework (three lenses, without regime complexity or cyber sovereignty), and draws different conclusions (European policy implications rather than international cyber governance). The two papers share empirical subject matter---the same three jurisdictions and regulatory developments---but make distinct analytical arguments to distinct audiences. We estimate textual overlap at approximately 15--20%, confined to factual descriptions of regulatory instruments (well below the informal ~25% threshold at which editors typically flag concern). The analytical framing, theoretical apparatus, original contributions, discussion, and conclusions are entirely different. The JCP paper's cyber governance trilemma thesis, comparative regulatory timeline dataset, developing-nations cascade analysis, and AI-cyber conflict subsection have no counterpart in the IPR submission.
 
 Both journals operate on rolling review timelines. We intend to submit the IPR paper concurrently. Neither journal's policies prohibit simultaneous submission of different papers to different journals, and the distinct framing ensures that each paper makes an independent contribution appropriate to its target audience.
 

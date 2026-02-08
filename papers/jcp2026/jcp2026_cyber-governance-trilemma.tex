@@ -243,24 +243,24 @@ China has advanced some of the first AI laws and regulations at the national lev
 
 \begin{table}[ht]
 \centering\small
-\begin{tabularx}{\linewidth}{@{}l >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{2.6cm} X@{}}
+\begin{tabularx}{\linewidth}{@{}l >{\raggedright\arraybackslash}p{2.4cm} >{\raggedright\arraybackslash}p{1.8cm} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{3.6cm}@{}}
 \toprule
-\textbf{Date} & \textbf{Title} & \textbf{Issuing Body} & \textbf{Description} \\
+\textbf{Date} & \textbf{Title} & \textbf{Issuing Body} & \textbf{Description} & \textbf{Cyber Governance Dimension} \\
 \midrule
-June 2017 & Cybersecurity Law & National People's Congress & Legal frameworks for cybersecurity, data protection, and network security, indirectly impacting AI. \\
+June 2017 & Cybersecurity Law & NPC & Legal frameworks for cybersecurity, data protection, and network security. & Foundation of China's cyber governance architecture; amended Oct 2025 to incorporate AI. \\
 \addlinespace
-Sept.\ 2021 & Data Security Law & National People's Congress & Regulations on data processing and security affecting AI systems. \\
+Sept.\ 2021 & Data Security Law & NPC & Regulations on data processing and security affecting AI systems. & Data localisation and cross-border transfer controls; shapes AI training data governance. \\
 \addlinespace
-Nov.\ 2021 & Personal Information Protection Law (PIPL) & National People's Congress & Comprehensive data privacy law governing collection, storage, and transfer of personal information. \\
+Nov.\ 2021 & PIPL & NPC & Comprehensive data privacy law governing personal information. & Requires consent for AI processing of personal data; extraterritorial provisions. \\
 \addlinespace
-Mar.\ 2022 & Algorithm Recommendation Regulation & CAC & Regulates recommendation algorithms, requiring transparency and fairness. \\
+Mar.\ 2022 & Algorithm Recommendation Reg. & CAC & Regulates recommendation algorithms, requiring transparency and fairness. & First algorithm-specific governance globally; algorithm registration as cyber governance tool. \\
 \addlinespace
-Jan.\ 2023 & Deep Synthesis Regulation & CAC & Governs generative AI, focusing on authenticity and traceability of AI-generated content. \\
+Jan.\ 2023 & Deep Synthesis Reg. & CAC & Governs generative AI authenticity and traceability. & Content-labelling mandates for AI-generated material; anti-disinformation function. \\
 \addlinespace
-Aug.\ 2023 & Generative AI Measures & CAC and six other authorities & Obligations on generative AI service providers for legality, fairness, and cybersecurity. \\
+Aug.\ 2023 & Generative AI Measures & CAC + 6 & Obligations on generative AI providers for legality and cybersecurity. & Mandatory security assessments; bridges AI governance and network security enforcement. \\
 \bottomrule
 \end{tabularx}
-\caption{Chinese AI laws and regulations.}
+\caption{Chinese AI laws and regulations, with cyber governance dimensions.}
 \label{tab:china_laws}
 \end{table}
 
@@ -340,7 +340,7 @@ These divergent positions produce what we term the \textit{cyber governance tril
   \item \textbf{Regulatory interoperability}: maintaining compatibility with other jurisdictions' frameworks to enable cross-border operations.
 \end{enumerate}
 
-The trilemma is not merely an empirical coincidence---it reflects a structural incompatibility among the three objectives, operating through three bilateral tensions.
+The trilemma is not merely an empirical coincidence---it reflects a structural incompatibility among the three objectives, operating through three bilateral tensions. The logic parallels Rodrik's globalisation trilemma, which holds that nations cannot simultaneously maintain deep economic integration, national sovereignty, and democratic politics.\autocite{rodrik2011globalization} Just as Rodrik showed that the constraints are distributional (the gains from integration come at the cost of policy autonomy or democratic accountability), the AI governance trilemma is driven by distributional choices about who bears risk, who captures economic value, and who sets international norms. Each objective requires institutional commitments that structurally undermine the other two.
 
 The \textit{innovation--safety tension} is the most widely discussed: stringent ex ante regulation requires developers to demonstrate compliance before deployment, adding time and cost that directly reduce innovation speed. The EU's conformity assessment regime for high-risk AI systems illustrates this clearly: providers must complete risk assessments, establish quality management systems, and maintain technical documentation before market access, a process that delays deployment relative to jurisdictions without such requirements. Conversely, permissive regulation accelerates deployment but increases harm probability, as the US experience with largely unregulated AI-enabled content recommendation systems and deepfake generation tools demonstrates.
 
@@ -350,7 +350,14 @@ The \textit{innovation--interoperability tension} operates through the Brussels 
 
 The structural cause of the trilemma is that AI governance involves distributional choices---who bears risk, who captures economic value, who sets international norms---that map onto incompatible political economy preferences across jurisdictions. No single regulatory design can simultaneously minimise barriers to innovation, maximise safety guarantees, and maintain cross-border regulatory compatibility, because each objective demands institutional choices that work against the other two.
 
-Each jurisdiction therefore sacrifices one objective, as summarised in Table~\ref{tab:trilemma}. The EU prioritises safety and interoperability (through its Brussels Effect ambitions) at the cost of innovation velocity. The US, particularly after the revocation of EO~\#14110, prioritises innovation speed at the cost of consistent safety guarantees. China prioritises innovation speed and selective safety enforcement at the cost of international interoperability, embedding AI governance within a cyber sovereignty strategy that is structurally incompatible with multi-stakeholder governance models.\autocite{mueller2017internet}
+Each jurisdiction therefore sacrifices one objective, as illustrated in Figure~\ref{fig:trilemma} and summarised in Table~\ref{tab:trilemma}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/trilemma_triangle.pdf}
+    \caption{The cyber governance trilemma. Each jurisdiction is positioned near the two objectives it prioritises, sacrificing the third. The three edges represent the bilateral tensions that drive the structural trade-off.}
+    \label{fig:trilemma}
+\end{figure} The EU prioritises safety and interoperability (through its Brussels Effect ambitions) at the cost of innovation velocity. The US, particularly after the revocation of EO~\#14110, prioritises innovation speed at the cost of consistent safety guarantees. China prioritises innovation speed and selective safety enforcement at the cost of international interoperability, embedding AI governance within a cyber sovereignty strategy that is structurally incompatible with multi-stakeholder governance models.\autocite{mueller2017internet}
 
 \begin{table}[ht]
 \centering\small
